@@ -1,0 +1,23 @@
+<%= form_for(@sales_product, html: { class: "custom"}) do |f| %>
+   <div class="row">
+     <div class="small-2 columns">
+       <%= f.label :name, class: "right inline"%>
+     </div>
+     <div class="small-10 columns">
+       <%= f.text_field :name, placeholder: "Sales Product Name" %>
+     </div> 
+   </div>
+   <div class="row">
+     <div class="small-2 columns">
+       <%= f.label :desc, class: "right inline" %>
+     </div>
+     <div class="small-10 columns">
+       <%= f.text_field :desc, placeholder: "Description" %>
+     </div> 
+   </div>
+   <div class="row">
+     <div class="small-10 small-offset-2 columns">
+       <%= f.submit 'Submit', :class => 'button small' %>
+     </div>
+   </div>
+<% end %>

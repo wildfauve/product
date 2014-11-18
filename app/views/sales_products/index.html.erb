@@ -1,0 +1,15 @@
+<dl class="accordion" data-accordion>
+   <% @sales_products.each do |sp| %>
+     <dd class="accordion-navigation">
+       <a href="#panel-<%= sp.id %>">
+          <i class="fi-torso"></i>
+          <%= sp.name%>       
+       </a>
+       <div id="panel-<%= sp.id %>" class="content">
+          <%= sp.desc %>
+       </div>
+     </dd>
+  <% end %>
+</dl>
+
+<%= link_to "New Sales Product", new_sales_product_path, class: "button"%>
