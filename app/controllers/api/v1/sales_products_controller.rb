@@ -7,6 +7,7 @@ class Api::V1::SalesProductsController < Api::ApplicationController
   def show
     @sales_product = SalesProduct.find(params[:id])
   end
+      
   
   def successful_create_event(party)
   end

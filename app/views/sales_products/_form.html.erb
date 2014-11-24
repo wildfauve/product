@@ -16,6 +16,14 @@
      </div> 
    </div>
    <div class="row">
+     <div class="small-2 columns">
+       <%= f.label :requires_validation, class: "right inline" %>
+     </div>
+     <div class="small-10 columns">
+       <%= f.check_box :requires_validation, placeholder: "Requires Validation" %>
+     </div> 
+   </div>
+   <div class="row">
      <div class="small-10 small-offset-2 columns">
        <%= f.submit 'Submit', :class => 'button small' %>
      </div>

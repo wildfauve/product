@@ -15,6 +15,16 @@ class AccountsPort < Port
     self
   end
   
+  def reset_account(link: nil)
+    conn = Faraday.new(url: link)
+    conn.params = {reset: true}
+    resp = conn.put
+    #raise if resp.status >= 300
+    @reset = JSON.parse(resp.body)
+    @msg = @reset
+    self    
+  end
+  
   
   def customer_msg(origination)
     {

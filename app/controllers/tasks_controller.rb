@@ -1,11 +1,15 @@
-class SalesProductsController < ApplicationController
+class TasksController < ApplicationController
   
   def index
-    @sales_products = SalesProduct.all
+    @tasks = Task.all
   end
   
   def new
     @sales_product = SalesProduct.new
+  end
+  
+  def show
+    @task = Task.find(params[:id])
   end
   
   def create

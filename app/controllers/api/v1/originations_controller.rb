@@ -1,6 +1,7 @@
 class Api::V1::OriginationsController < Api::ApplicationController
   
   def index
+    @sales_product = SalesProduct.find(params[:sales_product_id])
   end
   
   def create
@@ -8,6 +9,21 @@ class Api::V1::OriginationsController < Api::ApplicationController
     @sales_product.subscribe(self)
     @sales_product.buy(buy_msg: params)
   end
+  
+  def destroy
+    @buy = Origination.find(params[:id])
+    @buy.subscribe(self)
+    @buy.remove
+  end
+  
+  def successful_create_event(sales_prod)
+    redirect_to sales_products_path
+  end
+  
+  def success_remove_event(sales_prod)
+    render json: {status: :ok}, status: :ok
+  end
+  
   
   def successful_create_event(party)
   end
@@ -19,5 +35,11 @@ class Api::V1::OriginationsController < Api::ApplicationController
     @prod = prod
     render status: :created, location: api_v1_sales_product_origination_path(@prod, @prod.purchase)
   end
+
+  def delayed_buy_event(prod)
+    @prod = prod
+    render status: :accepted, location: approval_api_v1_sales_product_originations_path(@prod, @prod.purchase)
+  end
+
   
 end

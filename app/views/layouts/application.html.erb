@@ -12,6 +12,21 @@
   </head>
 
   <body>
+    <div class="icon-bar six-up">
+      <a class="item">
+        <i class="fi-home"></i>
+        <label>Home</label>
+      </a>
+      <%= link_to(sales_products_path, class: "item") do %>
+        <i class="fi-thumbnails"></i>
+        <label>Sales Products</label>
+      <% end %>
+      <%= link_to(tasks_path, class: "item") do %>
+        <i class="fi-magnifying-glass"></i>
+        <label>tasks</label>
+      <% end %>      
+    </div>    
+
 
     <%= yield %>
     <%= javascript_include_tag "application" %>

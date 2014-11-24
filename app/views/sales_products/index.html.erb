@@ -2,14 +2,27 @@
    <% @sales_products.each do |sp| %>
      <dd class="accordion-navigation">
        <a href="#panel-<%= sp.id %>">
-          <i class="fi-torso"></i>
+          <i class="fi-dollar"></i>
           <%= sp.name%>       
        </a>
        <div id="panel-<%= sp.id %>" class="content">
-          <%= sp.desc %>
+          <div class="row">
+             Description: <%= sp.desc %>
+          </div>
+          <div class="row">          
+             Needs Validation?:<%= sp.requires_validation %>
+          </div>
+          <div class="row">
+             <%= link_to "Edit", edit_sales_product_path(sp), class: "button" %>
+             <%= link_to "Delete", sales_product_path(sp), method: :delete, class: "button" %>
+          </div>
+         
+          <% sp.originations.each do |buy| %>
+             <%= buy.party_by_value()%>
+          <% end %>
        </div>
      </dd>
   <% end %>
 </dl>
 
-<%= link_to "New Sales Product", new_sales_product_path, class: "button"%>
+<%= link_to "New Sales Product", new_sales_product_path, class: "button"%> 
