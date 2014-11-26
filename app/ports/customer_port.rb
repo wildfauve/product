@@ -30,12 +30,13 @@ class CustomerPort < Port
     }
   end
   
-  
   def get_customer(url: nil)
     conn = Faraday.new(url: url)
     resp = conn.get
     @http_status = resp.status
-    if @http_status >= 300
+    if @http_status >= 500
+      @status = :service_error
+    elsif @http_status >= 300
       @status = JSON.parse(resp.body)["status"].to_sym
     else
       @status = :ok

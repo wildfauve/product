@@ -1,15 +1,33 @@
 <table>
   <thead>
     <tr>
-      <th>Task</th>
-      <th></th>
+      <th>Sales Product</th>
+      <th>Party</th>
+      <th>Validation State</th>      
+      <th>Algorithm Results</th>            
+      <th>Actions</th>            
     </tr>
   </thead>
    <tbody>
       <% @tasks.each do |task| %>
          <tr>
-            <td><%= task%></td>
+            <td><%= task.sales_product.name%></td>
+            <td><%= task.party_name%></td>
+            <td><%= task.state%></td>
+            <td>
+               <dl class="sub-nav">
+                 <dt>Status: </dt>
+                 <% task.sales_product.algorithms.each do |alg| %>
+                    <dd class="active"><a href="#"><i class="fi-check"></i><%= alg.name %></a></dd>
+                  <% end%>
+               </dl>
+               
+            </td>
+            <td>
+               <%= link_to "Approve", approval_sales_product_origination_path(task.sales_product, task), method: :put, class: "button"%>
+               <%= link_to "Delete", sales_product_origination_path(task.sales_product, task), method: :delete, class: "button"%>
+            </td>
          </tr>
-      <% end %>     
+      <% end %>    
    </tbody>
 </table>

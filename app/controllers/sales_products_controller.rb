@@ -21,7 +21,7 @@ class SalesProductsController < ApplicationController
   def update
     @sales_product = SalesProduct.find(params[:id])
     @sales_product.subscribe(self)
-    @sales_product.update_me(sales_prod: params[:sales_product])
+    @sales_product.update_me(sales_prod: params[:sales_product], algs: params[:algorithms])
   end
 
   def destroy

@@ -1,0 +1,16 @@
+<%= form_tag(host_scan_algorithms_path, html: { class: "custom"}) do %>
+   <div class="row">
+     <div class="small-2 columns">
+       <%= label_tag :host_name, nil, class: "right inline"%>
+     </div>
+     <div class="small-10 columns">
+       <%= text_field_tag :host_name, nil, placeholder: "API Route of Algorithm Host" %>
+     </div> 
+   </div>
+   <div class="row">
+     <div class="small-10 small-offset-2 columns">
+       <%= submit_tag 'Submit', :class => 'button small' %>
+     </div>
+   </div>
+
+<% end %>

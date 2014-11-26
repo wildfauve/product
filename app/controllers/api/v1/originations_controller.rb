@@ -10,6 +10,11 @@ class Api::V1::OriginationsController < Api::ApplicationController
     @sales_product.buy(buy_msg: params)
   end
   
+  def show
+    @sales_product = SalesProduct.find(params[:sales_product_id])
+    @origination = Origination.find(params[:id])
+  end
+  
   def destroy
     @buy = Origination.find(params[:id])
     @buy.subscribe(self)

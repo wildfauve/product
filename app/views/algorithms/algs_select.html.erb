@@ -1,0 +1,18 @@
+<%= form_tag(selected_algs_algorithms_path, html: { class: "custom"}) do %>
+   <% @algs["algorithms"].each do |alg|%>
+      <div class="row">
+        <div class="small-3 columns">
+             <%= label_tag alg["name"], nil, class: "right inline"%>
+       </div>
+         <div class="small-3 columns end">
+            <%= check_box_tag alg["name"]%>
+         </div>
+      </div>
+   <% end %>
+   <div class="row">
+     <div class="small-10 small-offset-2 columns">
+       <%= submit_tag 'Submit', :class => 'button small' %>
+     </div>
+   </div>
+   
+<% end %>

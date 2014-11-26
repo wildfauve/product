@@ -1,0 +1,28 @@
+<%= link_to 'New Host Scan', host_form_algorithms_path, class: "button" %>
+
+<table class="table">
+   <thead>
+     <tr>
+       <th>Name</th>
+       <th>Actions</th>      
+     </tr>
+   </thead>
+   <tbody>
+      <% @algs.each do |alg| %>         
+         <tr>
+            <td>
+               <%= alg.name%>
+            </td>
+            <td>
+               <% if alg.selected %>
+                  <div class="panel">
+                     Selected
+                  </div>
+               <% else%>
+                  <%= link_to "Select", select_algorithm_path(alg), method: :put, class: "button"%>
+               <% end %>
+            </td>            
+         </tr>
+      <% end %>
+   </tbody>
+</table>

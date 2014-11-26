@@ -7,20 +7,34 @@
        </a>
        <div id="panel-<%= sp.id %>" class="content">
           <div class="row">
-             Description: <%= sp.desc %>
+            <div class="panel">
+               <h5>Description: <%= sp.desc %></h5>
+            </div>
           </div>
-          <div class="row">          
-             Needs Validation?:<%= sp.requires_validation %>
+          <div class="row">
+            <div class="panel">      
+                Needs Validation?: <%= sp.requires_validation %>
+             </div>
           </div>
           <div class="row">
              <%= link_to "Edit", edit_sales_product_path(sp), class: "button" %>
              <%= link_to "Delete", sales_product_path(sp), method: :delete, class: "button" %>
           </div>
-         
-          <% sp.originations.each do |buy| %>
-             <%= buy.party_by_value()%>
-          <% end %>
-       </div>
+          <div class="row">
+             <div class="small-5 columns">
+                <dl class="sub-nav">
+                  <dt>Number of Originations: </dt>
+                  <dd class="active"><a href="#"><%= sp.originations.count %></a></dd>
+                </dl>
+             </div>
+             <div class="small-7 columns">
+                <% sp.originations.each do |buy| %>
+                   <div class="panel">
+                     <i class="fi-torso"></i><h5><%= buy.party_name()%></h5>
+                   </div>
+                <% end %>
+            </div>
+         </div>
      </dd>
   <% end %>
 </dl>

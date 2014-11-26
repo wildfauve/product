@@ -24,6 +24,21 @@
      </div> 
    </div>
    <div class="row">
+      <div class="panel">
+         Select Algorithms
+      </div>
+   </div>
+   <% Algorithm.all.each do |alg|%>
+      <div class="row">
+        <div class="small-2 columns">
+            <%= label_tag(alg.name)%>
+        </div>
+        <div class="small-10 columns">
+           <%= check_box_tag "algorithms[ids][]", alg.id, @sales_product.algorithms.include?(alg), id: "product_alg_ids_#{alg.id}" %>    
+        </div>
+      </div>   
+   <% end %>
+   <div class="row">
      <div class="small-10 small-offset-2 columns">
        <%= f.submit 'Submit', :class => 'button small' %>
      </div>

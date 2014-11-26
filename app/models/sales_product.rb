@@ -13,14 +13,17 @@ class SalesProduct
   
   has_many :originations
   
-  def create_me(sales_prod: nil)
-    update_attr(sales_prod: sales_prod)
+  has_many :algorithms
+  
+  def create_me(sales_prod: nil, algorithms: nil)
+    update_attrs(sales_prod: sales_prod, algorithms: algorithms)
     self.save
     publish(:successful_sales_product_create_event, self)
   end
 
-  def update_me(sales_prod: nil)
+  def update_me(sales_prod: nil, algs: nil)
     update_attrs(sales_prod: sales_prod)
+    update_algorithms(algs: algs)
     self.save
     publish(:successful_sales_product_update_event, self)
   end
@@ -29,6 +32,13 @@ class SalesProduct
     self.name = sales_prod[:name]
     self.desc = sales_prod[:desc]
     self.requires_validation = sales_prod[:requires_validation]    
+  end
+  
+  def update_algorithms(algs: nil)
+    algs["ids"].each do |id|
+      a = Algorithm.find(id)
+      self.algorithms << a unless self.algorithms.include?(a) 
+    end
   end
   
   def buy(buy_msg: nil)
@@ -40,6 +50,7 @@ class SalesProduct
         @account = @purchase.create_account
         publish(:successful_buy_event, self)
       else
+        @purchase.run_algorithms(buy_msg: buy_msg)
         publish(:delayed_buy_event, self)
       end
     else
