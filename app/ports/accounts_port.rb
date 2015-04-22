@@ -5,6 +5,18 @@ class AccountsPort < Port
   attr_accessor :account
   
   def create_new_account(origination)
+    circuit(:create_new_account_port, origination)
+    self
+  end
+
+  def create_new_account_port(origination)
+    conn = Faraday.new(url: Setting.services(:accounts, :create))
+    conn.params = customer_msg(origination)
+    self.send_to_port(pattern: :sync, connection: {object: conn, method: :post}, response_into: "@account")    
+  end
+  
+  
+  def create_new_account_2(origination)
     conn = Faraday.new(url: Setting.services(:accounts, :create))
     conn.params = customer_msg(origination)
     resp = conn.post
